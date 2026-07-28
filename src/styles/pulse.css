@@ -95,7 +95,6 @@
 /* shared segment states */
 .am-dim { opacity: 0.38; }
 .am-seg--active { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.14); }
-/* road ahead: plain quiet slab with a light outline — no stripes (Julia, Jul 28) */
 /* empty (future) stages: hatched so they read as slabs against the grey pane
    (Julia, Jul 28 — the plain-grey simplification blended into the background) */
 .am-seg--sliver { background-color: #f1f3f1; background-image: repeating-linear-gradient(53.76deg, transparent 0 4.4px, rgba(196,204,197,0.7) 4.4px 6px); }
@@ -145,7 +144,9 @@
 .am-sub-b { font-weight: 600; }
 .cp-mode-sep { width: 1px; height: 16px; margin: 0 4px; background: #ffffff2e; }
 /* B · One box: Up-next section head inside the While-you-were-away card */
-.am-merge-head { margin: 0 -20px; border-top: 1px solid #e3e3e3; padding: 14px 20px 2px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9a9a; }
+/* B · One box: the Up-next section reuses the card-head anatomy (icon tile +
+   14px title) so the merged card reads native — only the shell is shared */
+.am-merge-sect { display: flex; align-items: center; gap: 12px; margin: 8px -20px 0; border-top: 1px solid #e3e3e3; padding: 16px 20px 6px; }
 .am-showall { display: flex; height: 28px; align-items: center; gap: 6px; border-radius: 999px; border: 1px solid #e3e3e3; background: #fff; padding: 0 12px; font-family: inherit; font-size: 12px; font-weight: 600; color: #1c1c1c; cursor: pointer; transition: border-color 0.15s; }
 .am-showall:hover { border-color: #c9c9c9; }
 .am-showall span { color: #717171; }
@@ -323,3 +324,34 @@
 .tf-seepost { font-size: 12px; font-weight: 600; color: #555; white-space: nowrap; }
 .tf-wraprow .am-chev { width: auto; height: auto; }
 .am-row-cta-slot { display: flex; align-items: center; }
+
+/* ---- tf- · F-letter option variants (Julia's Jul 28 review round) ------- */
+.cp-mode--opts { top: 64px; }
+/* 3A · ramp dot + stage word */
+.tf-gdot { display: inline-flex; align-items: center; gap: 7px; border: none; background: none; padding: 0; font-family: inherit; font-size: 12.5px; font-weight: 500; color: #444; white-space: nowrap; }
+.tf-gdot i { display: block; width: 8px; height: 8px; border-radius: 999px; flex: none; }
+.tf-gdot--btn { cursor: pointer; }
+/* 2B · footnote */
+.tf-footnote { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: #fff; border-top: 1px solid #ececec; font-size: 12px; color: #8a8a8a; }
+/* 2C · system row */
+.tf-sysrow { display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: #fcfcfd; border-bottom: 1px solid #ececec; border-left: 3px solid #e3e3e3; font-size: 12.5px; color: #555; }
+.tf-sysrow b { color: #1c1c1c; }
+.tf-sysrow-x { margin-left: auto; border: none; background: none; padding: 0 2px; font-family: inherit; font-size: 12px; font-weight: 600; color: #b9b9be; cursor: pointer; }
+.tf-sysrow-x:hover { color: #717171; }
+/* 2E · coach mark */
+.tf-coach { position: absolute; left: 0; top: calc(100% + 10px); z-index: 40; width: 290px; background: #1f1f24; color: #f2f2f2; border-radius: 10px; padding: 12px 14px; font-size: 12px; font-weight: 400; line-height: 1.5; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.tf-coach::before { content: ''; position: absolute; top: -5px; left: 26px; width: 10px; height: 10px; background: #1f1f24; transform: rotate(45deg); }
+.tf-coach b { color: #fff; }
+.tf-coach-got { display: block; margin-top: 8px; border: none; background: none; padding: 0; font-family: inherit; font-size: 12px; font-weight: 600; color: #c9b8ff; cursor: pointer; }
+/* 4D / 7B · group bands */
+.tf-ghead { display: flex; align-items: center; gap: 8px; padding: 9px 20px; background: #fafafa; border-bottom: 1px solid #ececec; font-size: 12px; font-weight: 600; color: #717171; }
+.tf-ghead--amber { background: #fffaf0; border-color: #f3e3c2; color: #a86a00; }
+.tf-ghead--green { background: #f4faf6; border-color: #dcefe3; color: #17864f; }
+.tf-gn { display: inline-grid; place-items: center; min-width: 18px; height: 18px; border-radius: 999px; background: #f0a32e; color: #fff; font-size: 10.5px; padding: 0 5px; }
+.tf-gn--green { background: #2baf87; }
+.tf-gn--grey { background: #b9b9be; }
+/* 2D · Katie's cursive note card in the rail */
+.tf-katie { display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px; }
+.tf-katie-face { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #7a5cfa, #b48cff); }
+.tf-katie-note { margin: 0; font-family: Caveat, cursive; font-size: 19px; line-height: 1.3; color: #3d3d3d; }
+.tf-katie-sig { margin: 4px 0 0; font-size: 11px; color: #8a8a8a; }

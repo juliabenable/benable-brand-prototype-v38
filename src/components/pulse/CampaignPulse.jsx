@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import '../../styles/pulse.css';
 import { DAYS, LOCAL, crewFor } from './pulseData.js';
 import { stageOf, AmineProgress2, AmineTable, AmineRail, StayTuned, CreatorsFound } from './amine.jsx';
-import FixedTable from './tableFix.jsx';
+import FixedTable, { KatieSpotsNote } from './tableFix.jsx';
 
 /*
   Campaign Pulse v34 — single experience (v33's C), kept lean for polishing:
@@ -18,12 +18,16 @@ let persistedIdx = 3; // open on Day 9 — the dead middle is the thesis
 let persistedMode = 'product';
 let persistedRail = 'b'; // 'a' split cards · 'b' one box (opens on B for review) // 'product' | 'local'
 let persistedTable = 'f'; // 'a' Amine table · 'f' table-fixes letter (creators-table-study picks)
+// F-letter options (Julia's Jul 28 review): edu B/C/D/E · stage 3B/3A · actions 4A/4D · late 7A/7B
+let persistedOpts = { edu: 'b', stage: 'chips', act: 'rows', late: 'quiet' };
 
 export default function CampaignPulse() {
   const [idx, setIdx] = useState(persistedIdx);
   const [mode, setMode] = useState(persistedMode);
   const [railVar, setRailVar] = useState(persistedRail);
   const [tableVar, setTableVar] = useState(persistedTable);
+  const [fOpts, setFOpts] = useState(persistedOpts);
+  const setOpt = (k, v) => setFOpts((o) => ({ ...o, [k]: v }));
   const [openCrew, setOpenCrew] = useState(() => new Set());
   const [stageFilter, setStageFilter] = useState(null);
   const rootRef = useRef(null);
@@ -48,6 +52,7 @@ export default function CampaignPulse() {
   useEffect(() => { persistedMode = mode; }, [mode]);
   useEffect(() => { persistedRail = railVar; }, [railVar]);
   useEffect(() => { persistedTable = tableVar; }, [tableVar]);
+  useEffect(() => { persistedOpts = fOpts; }, [fOpts]);
   useEffect(() => { setStageFilter(null); }, [idx, mode]);
 
   const toggleCrew = (k) =>
@@ -144,6 +149,30 @@ export default function CampaignPulse() {
         </button>
       </div>
 
+      {/* F-letter options (Julia's Jul 28 review round) */}
+      {tableVar === 'f' && !phase && (
+        <div className="cp-mode cp-mode--opts" role="group" aria-label="F table options">
+          <span className="cp-scrub-tag">EDU</span>
+          {[['b', 'Footnote under the table'], ['c', 'Dismissable system row'], ['d', 'Katie note in the rail'], ['e', 'One-time coach mark']].map(([v, tip]) => (
+            <button key={v} type="button" title={tip} className={fOpts.edu === v ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('edu', v)}>
+              {v.toUpperCase()}
+            </button>
+          ))}
+          <span className="cp-mode-sep" aria-hidden />
+          <span className="cp-scrub-tag">STAGE</span>
+          <button type="button" title="Rail chips (3B)" className={fOpts.stage === 'chips' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('stage', 'chips')}>Chips</button>
+          <button type="button" title="Ramp dot + stage word (3A)" className={fOpts.stage === 'dots' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('stage', 'dots')}>Dot</button>
+          <span className="cp-mode-sep" aria-hidden />
+          <span className="cp-scrub-tag">ACTIONS</span>
+          <button type="button" title="Amber row anatomy (4A)" className={fOpts.act === 'rows' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('act', 'rows')}>Rows</button>
+          <button type="button" title="Needs-you group band (4D)" className={fOpts.act === 'group' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('act', 'group')}>Group</button>
+          <span className="cp-mode-sep" aria-hidden />
+          <span className="cp-scrub-tag">LATE</span>
+          <button type="button" title="Done rows cool down (7A)" className={fOpts.late === 'quiet' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('late', 'quiet')}>Quiet</button>
+          <button type="button" title="Split sections (7B)" className={fOpts.late === 'groups' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('late', 'groups')}>Groups</button>
+        </div>
+      )}
+
       {phase === 'sourcing' ? (
         <StayTuned />
       ) : phase === 'review' ? (
@@ -162,6 +191,7 @@ export default function CampaignPulse() {
                     onFilter={setStageFilter}
                     openCrew={openCrew}
                     toggleCrew={toggleCrew}
+                    opts={fOpts}
                   />
                 ) : (
                   <AmineTable
@@ -176,6 +206,9 @@ export default function CampaignPulse() {
               </div>
 
               <aside className="cp-tile-stack">
+                {/* 2D · Katie teaches the spots rule from the rail */}
+                {tableVar === 'f' && fOpts.edu === 'd' &&
+                  crewFor(scene.day, mode).some((c) => !c.mystery && c.stage === 0 && !c.found) && <KatieSpotsNote />}
                 <AmineRail scene={scene} railVar={railVar} />
               </aside>
             </div>

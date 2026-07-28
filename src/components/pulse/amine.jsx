@@ -510,7 +510,11 @@ export function AmineRail({ scene, railVar = 'a' }) {
         ))}
         {merged && (
           <>
-            <p className="am-merge-head">Up next</p>
+            {/* native section head — same anatomy as a card header (Julia, Jul 28) */}
+            <div className="am-merge-sect">
+              <span className="am-symtile"><img src={AIC.invites} alt="" /></span>
+              <p className="am-card-title">Up next</p>
+            </div>
             {scene.upNext.map((u, i) => (
               <NoteRow key={u.text} emoji={u.emoji} strong={u.text} rest={` — ${u.eta}`} last={i === scene.upNext.length - 1} />
             ))}
