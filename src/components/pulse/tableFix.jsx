@@ -329,9 +329,8 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
         </div>
       )}
 
-      <div className="am-cols" aria-hidden>
-        <span>CREATOR</span><span>LATEST UPDATE</span><span>STAGE</span><span />
-      </div>
+      {/* no column strip in F — the header + rows carry the reading (Julia, Jul 28:
+          "double header" once the status-light sub landed) */}
 
       {/* 2C · the system row — education as a dismissable row, speaking table */}
       {edu === 'c' && inviting && !sysRowDismissed && (
