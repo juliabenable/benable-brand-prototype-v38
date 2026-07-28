@@ -14,11 +14,13 @@ import { stageOf, AmineProgress2, AmineTable, AmineRail, StayTuned, CreatorsFoun
 
 // Survive captured-DOM remounts.
 let persistedIdx = 3; // open on Day 9 — the dead middle is the thesis
-let persistedMode = 'product'; // 'product' | 'local'
+let persistedMode = 'product';
+let persistedRail = 'b'; // 'a' split cards · 'b' one box (opens on B for review) // 'product' | 'local'
 
 export default function CampaignPulse() {
   const [idx, setIdx] = useState(persistedIdx);
   const [mode, setMode] = useState(persistedMode);
+  const [railVar, setRailVar] = useState(persistedRail);
   const [openCrew, setOpenCrew] = useState(() => new Set());
   const [stageFilter, setStageFilter] = useState(null);
   const rootRef = useRef(null);
@@ -41,6 +43,7 @@ export default function CampaignPulse() {
 
   useEffect(() => { persistedIdx = idx; }, [idx]);
   useEffect(() => { persistedMode = mode; }, [mode]);
+  useEffect(() => { persistedRail = railVar; }, [railVar]);
   useEffect(() => { setStageFilter(null); }, [idx, mode]);
 
   const toggleCrew = (k) =>
@@ -119,6 +122,14 @@ export default function CampaignPulse() {
         <button type="button" className={mode === 'local' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => switchMode('local')}>
           Local
         </button>
+        <span className="cp-mode-sep" aria-hidden />
+        <span className="cp-scrub-tag">RAIL</span>
+        <button type="button" className={railVar === 'a' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setRailVar('a')} title="Split cards">
+          A
+        </button>
+        <button type="button" className={railVar === 'b' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setRailVar('b')} title="One box">
+          B
+        </button>
       </div>
 
       {phase === 'sourcing' ? (
@@ -142,7 +153,7 @@ export default function CampaignPulse() {
               </div>
 
               <aside className="cp-tile-stack">
-                <AmineRail scene={scene} />
+                <AmineRail scene={scene} railVar={railVar} />
               </aside>
             </div>
           </div>

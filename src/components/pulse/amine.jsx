@@ -17,10 +17,8 @@ const B = import.meta.env.BASE_URL;
 const AIC = {
   group: `${B}labs/group.svg`,
   invites: `${B}labs/invites.svg`,
-  insight: `${B}labs/insight.svg`,
   chevron: `${B}labs/chevron.svg`,
   check: `${B}labs/check-circle.svg`,
-  paceStrip: `${B}labs/pace-strip.jpg`,
   stayTuned: `${B}labs/stay-tuned.png`,
 };
 
@@ -495,22 +493,11 @@ function NoteRow({ emoji, strong, rest, last }) {
   );
 }
 
-function Meter({ label, trailing, pct, fill }) {
-  return (
-    <div className="am-meter">
-      <div className="am-meter-top">
-        <span className="am-meter-label">{label}</span>
-        {trailing && <span className="am-meter-day">{trailing}</span>}
-      </div>
-      <div className="am-meter-track" role="meter" aria-label={label} aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
-        <i style={{ width: `calc(${pct}% - 2px)`, background: fill }} />
-      </div>
-    </div>
-  );
-}
-
-export function AmineRail({ scene }) {
-  const { recap, race } = scene;
+export function AmineRail({ scene, railVar = 'a' }) {
+  const { recap } = scene;
+  /* B · One box (Julia, Jul 28): While-you-were-away and Up-next share a
+     single card — recap items first, then an UP NEXT section head. */
+  const merged = railVar === 'b';
   return (
     <aside className="am-rail">
       <RailCard
@@ -521,26 +508,24 @@ export function AmineRail({ scene }) {
         {recap.items.map((it, i) => (
           <NoteRow key={it.bold} emoji={it.emoji} strong={it.bold} rest={it.rest} last={i === recap.items.length - 1} />
         ))}
+        {merged && (
+          <>
+            <p className="am-merge-head">Up next</p>
+            {scene.upNext.map((u, i) => (
+              <NoteRow key={u.text} emoji={u.emoji} strong={u.text} rest={` — ${u.eta}`} last={i === scene.upNext.length - 1} />
+            ))}
+          </>
+        )}
       </RailCard>
 
-      <RailCard icon={AIC.invites} title="Up next">
-        {scene.upNext.map((u, i) => (
-          <NoteRow key={u.text} emoji={u.emoji} strong={u.text} rest={` — ${u.eta}`} last={i === scene.upNext.length - 1} />
-        ))}
-      </RailCard>
-
-      <RailCard icon={AIC.insight} title="The pace" subtitle={`Day ${scene.day} out of 30`} pad="am-pace-body">
-        <Meter label="Your campaign" trailing={`Day ${scene.day}`} pct={race.you} fill="#815aff" />
-        <div style={{ height: 10 }} />
-        <Meter label="Industry average" pct={race.them} fill="#c4c4c4" />
-        <div className="am-pace-strip">
-          <span aria-hidden className="am-pace-img">
-            <img src={AIC.paceStrip} alt="" />
-            <i />
-          </span>
-          <p className="am-pace-caption" dangerouslySetInnerHTML={{ __html: race.caption }} />
-        </div>
-      </RailCard>
+      {/* The pace card removed everywhere (Julia, Jul 28) */}
+      {!merged && (
+        <RailCard icon={AIC.invites} title="Up next">
+          {scene.upNext.map((u, i) => (
+            <NoteRow key={u.text} emoji={u.emoji} strong={u.text} rest={` — ${u.eta}`} last={i === scene.upNext.length - 1} />
+          ))}
+        </RailCard>
+      )}
     </aside>
   );
 }
