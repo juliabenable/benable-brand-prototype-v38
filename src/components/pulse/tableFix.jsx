@@ -46,7 +46,8 @@ let coachDismissed = false;
 const SPOTS_RULE = `First ${SPOTS} to reply take the spots — extras are saved for your next campaign.`;
 
 export default function FixedTable({ scene, rows, filter, onFilter, openCrew, toggleCrew, opts = {} }) {
-  const { edu = 'b', stage = 'chips', act = 'rows', late = 'quiet', head = 'grey', ship = 'band' } = opts;
+  const { edu = 'b', stage = 'chips', act = 'rows', late = 'quiet', head = 'grey', ship = 'band', btn = 'amber' } = opts;
+  const purpleBtns = btn === 'purple';
   const [, bump] = useReducer((n) => n + 1, 0);
   const crewAll = crewFor(scene.day, scene.mode);
   const cohort = crewAll.length;
@@ -146,8 +147,12 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
       : c.confirmEmail
         ? { kind: 'visit', name: c.name }
         : null;
-    /* honest buttons age better: the ship modal asks for tracking */
-    const cta = foundRow ? 'Review matches' : c.ship ? 'Add tracking' : c.confirmEmail ? 'Confirm visit' : c.action?.cta;
+    /* honest buttons age better: the ship modal asks for tracking (amber mode);
+       the purple set mirrors Julia's mock verbatim, incl. "Mark shipped" */
+    const cta = foundRow ? 'Review matches' : c.ship ? (purpleBtns ? 'Mark shipped' : 'Add tracking') : c.confirmEmail ? 'Confirm visit' : c.action?.cta;
+    const actBtnClass = purpleBtns
+      ? `tf-pbtn${foundRow ? ' tf-pbtn--primary' : ''}`
+      : 'tf-abtn';
     const rowClass = `am-row tf-row${amber && !calm ? ' tf-needs' : ''}${live ? ' tf-live' : ''}${wrapped ? ' tf-done tf-wraprow' : ''}`;
 
     return (
@@ -187,7 +192,7 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
             <span className="am-row-cta-slot">
               <button
                 type="button"
-                className={`tf-abtn${shipDay && c.ship && !sheetDone ? ' tf-abtn--waiting' : ''}`}
+                className={`${actBtnClass}${shipDay && c.ship && !sheetDone ? ' tf-abtn--waiting' : ''}`}
                 onClick={(e) => { e.stopPropagation(); if (actModal) setModal(actModal); }}
               >
                 {cta}
@@ -196,7 +201,11 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
           ) : live ? (
             /* thanks reverted to a normal button (postcard retired, Julia Jul 28) */
             <span className="am-row-cta-slot">
-              <button type="button" className="tf-abtn" onClick={(e) => e.stopPropagation()}>Say thanks</button>
+              {purpleBtns ? (
+                <button type="button" className="tf-pbtn tf-pbtn--love" onClick={(e) => e.stopPropagation()}><i aria-hidden>♡</i> Say thanks</button>
+              ) : (
+                <button type="button" className="tf-abtn" onClick={(e) => e.stopPropagation()}>Say thanks</button>
+              )}
             </span>
           ) : (
             <span className="tf-chipslot">
@@ -320,7 +329,11 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
           <span className="tf-band-txt">
             <b>{liveLabel} went live 🎉</b> — this is when a thank-you lands the deepest. Creators who feel the love post again.
           </span>
-          <button type="button" className="tf-abtn tf-band-cta">Send yours</button>
+          {purpleBtns ? (
+            <button type="button" className="tf-pbtn tf-pbtn--love tf-band-cta"><i aria-hidden>♡</i> Send yours</button>
+          ) : (
+            <button type="button" className="tf-abtn tf-band-cta">Send yours</button>
+          )}
         </div>
       )}
 
