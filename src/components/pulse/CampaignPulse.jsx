@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import '../../styles/pulse.css';
 import { DAYS, LOCAL, crewFor } from './pulseData.js';
 import { stageOf, AmineProgress2, AmineTable, AmineRail, StayTuned, CreatorsFound } from './amine.jsx';
+import FixedTable from './tableFix.jsx';
 
 /*
   Campaign Pulse v34 — single experience (v33's C), kept lean for polishing:
@@ -16,11 +17,13 @@ import { stageOf, AmineProgress2, AmineTable, AmineRail, StayTuned, CreatorsFoun
 let persistedIdx = 3; // open on Day 9 — the dead middle is the thesis
 let persistedMode = 'product';
 let persistedRail = 'b'; // 'a' split cards · 'b' one box (opens on B for review) // 'product' | 'local'
+let persistedTable = 'f'; // 'a' Amine table · 'f' table-fixes letter (creators-table-study picks)
 
 export default function CampaignPulse() {
   const [idx, setIdx] = useState(persistedIdx);
   const [mode, setMode] = useState(persistedMode);
   const [railVar, setRailVar] = useState(persistedRail);
+  const [tableVar, setTableVar] = useState(persistedTable);
   const [openCrew, setOpenCrew] = useState(() => new Set());
   const [stageFilter, setStageFilter] = useState(null);
   const rootRef = useRef(null);
@@ -44,6 +47,7 @@ export default function CampaignPulse() {
   useEffect(() => { persistedIdx = idx; }, [idx]);
   useEffect(() => { persistedMode = mode; }, [mode]);
   useEffect(() => { persistedRail = railVar; }, [railVar]);
+  useEffect(() => { persistedTable = tableVar; }, [tableVar]);
   useEffect(() => { setStageFilter(null); }, [idx, mode]);
 
   const toggleCrew = (k) =>
@@ -130,6 +134,14 @@ export default function CampaignPulse() {
         <button type="button" className={railVar === 'b' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setRailVar('b')} title="One box">
           B
         </button>
+        <span className="cp-mode-sep" aria-hidden />
+        <span className="cp-scrub-tag">TABLE</span>
+        <button type="button" className={tableVar === 'a' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setTableVar('a')} title="Amine table (current)">
+          A
+        </button>
+        <button type="button" className={tableVar === 'f' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setTableVar('f')} title="Table fixes — the creators-table study's picks">
+          F
+        </button>
       </div>
 
       {phase === 'sourcing' ? (
@@ -142,14 +154,25 @@ export default function CampaignPulse() {
           <div className="cp-crew2" key={`b-${scene.day}`}>
             <div className="cp-crew-cols cp-crew-cols--left">
               <div className="cp-crew-left">
-                <AmineTable
-                  scene={scene}
-                  rows={crewRows}
-                  filter={stageFilter}
-                  onFilter={setStageFilter}
-                  openCrew={openCrew}
-                  toggleCrew={toggleCrew}
-                />
+                {tableVar === 'f' ? (
+                  <FixedTable
+                    scene={scene}
+                    rows={crewRows}
+                    filter={stageFilter}
+                    onFilter={setStageFilter}
+                    openCrew={openCrew}
+                    toggleCrew={toggleCrew}
+                  />
+                ) : (
+                  <AmineTable
+                    scene={scene}
+                    rows={crewRows}
+                    filter={stageFilter}
+                    onFilter={setStageFilter}
+                    openCrew={openCrew}
+                    toggleCrew={toggleCrew}
+                  />
+                )}
               </div>
 
               <aside className="cp-tile-stack">

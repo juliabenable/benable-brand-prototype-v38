@@ -435,7 +435,7 @@ export function AmineTable({ scene, rows, filter, onFilter, openCrew, toggleCrew
 /* shared confirm pop-up: 'ship' asks for a tracking number (we track the
    delivery from it); 'visit' asks for the visit date (sets confirmed, and the
    date passing sets visited). Demo only — confirm just closes. */
-function ActionModal({ act, onClose }) {
+export function ActionModal({ act, onClose }) {
   const ship = act.kind === 'ship';
   /* portal to <body>: the captured page's stacking contexts would otherwise
      trap the fixed veil inside the card — it must cover the whole screen */

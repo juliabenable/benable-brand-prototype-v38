@@ -266,3 +266,58 @@
 .am-modal-ghost:hover { border-color: #c9c9c9; }
 .am-modal-go { height: 36px; padding: 0 16px; border-radius: 999px; border: none; background: #7a5cfa; font-family: inherit; font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; transition: background 0.15s ease; }
 .am-modal-go:hover { background: #5e41d6; }
+
+/* ---- tf- · F "Table fixes" letter (creators-table-study picks, Jul 28) ----
+   amber = ball in your court · rail chips = the page's one progress language ·
+   gold postcard = joy, never a chore · wrap day = trophy shelf */
+.tf-table { overflow: visible; }
+.tf-table .am-cols, .tf-table .am-row { grid-template-columns: 218px minmax(0, 1fr) 170px 36px; }
+.tf-table .tf-wraprow { grid-template-columns: 218px minmax(0, 1fr) 170px 96px; }
+.tf-head { overflow: visible; }
+.tf-dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; margin-right: 6px; vertical-align: 1px; }
+.tf-sub--amber { color: #b57506 !important; font-weight: 600; }
+.tf-info { position: relative; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 11px; border-radius: 999px; border: 1px solid #e3e3e3; background: #fff; font-size: 12px; color: #717171; cursor: default; white-space: nowrap; }
+.tf-info b { color: #444; font-weight: 600; }
+.tf-info-i { color: #9a9a9e; font-weight: 600; }
+.tf-pop { display: none; position: absolute; top: 32px; right: 0; width: 264px; background: #1f1f24; color: #f2f2f2; border-radius: 10px; padding: 12px 14px; font-size: 12px; font-weight: 400; line-height: 1.5; box-shadow: 0 10px 30px rgba(0,0,0,.18); z-index: 30; white-space: normal; }
+.tf-pop b { color: #fff; }
+.tf-info:hover .tf-pop, .tf-info:focus .tf-pop { display: block; }
+.tf-steps { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 20px; background: #fffaf0; border-bottom: 1px solid #f3e3c2; }
+.tf-steps-l { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tf-step { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: #555; }
+.tf-sn { display: inline-grid; place-items: center; width: 17px; height: 17px; border-radius: 999px; border: 1.5px solid #c9c9c9; color: #8a8a8a; font-size: 10px; font-weight: 700; font-style: normal; }
+.tf-step--done { color: #17864f; }
+.tf-step--done .tf-sn { border-color: #2baf87; background: #2baf87; color: #fff; }
+.tf-step--now { color: #1c1c1c; font-weight: 600; }
+.tf-step--now .tf-sn { border-color: #f0a32e; color: #a86a00; }
+.tf-arrow { color: #c9c9c9; }
+.tf-dl { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 15px; border-radius: 999px; background: #1c1c1c; color: #fff; border: none; font-family: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.tf-band { display: flex; align-items: center; gap: 12px; padding: 11px 20px; background: linear-gradient(90deg, #fffbeb, #fff); border-bottom: 1px solid #f0e7cd; }
+.tf-faces { display: flex; flex: none; }
+.tf-faces img { width: 26px; height: 26px; border-radius: 999px; border: 2px solid #fff; object-fit: cover; }
+.tf-faces img + img { margin-left: -8px; }
+.tf-band-txt { font-size: 12.5px; color: #4a4a4a; min-width: 0; }
+.tf-band-txt b { color: #1c1c1c; }
+.tf-band-cta { margin-left: auto; }
+.tf-postcard { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 13px; border-radius: 8px; background: #fff; border: 1px solid #e6d9b8; box-shadow: 0 2px 6px rgba(180,150,60,.14); font-family: inherit; font-size: 12px; font-weight: 600; color: #8a6d1f; transform: rotate(-2.5deg); transition: transform .15s ease; cursor: pointer; white-space: nowrap; }
+.tf-postcard:hover { transform: rotate(0deg) translateY(-1px); }
+.tf-needs { background: linear-gradient(90deg, #fffaf0, #fff 55%); box-shadow: inset 3px 0 0 #f0a32e; }
+.tf-uamber, .tf-uamber .cp-live, .tf-uamber .cp-live-fact { color: #b57506; font-weight: 500; }
+.tf-abtn { display: inline-flex; align-items: center; height: 30px; padding: 0 13px; border-radius: 999px; background: #fff3dd; border: 1px solid #ecc06c; font-family: inherit; font-size: 12px; font-weight: 600; color: #a86a00; cursor: pointer; white-space: nowrap; transition: transform .12s ease; }
+.tf-abtn:hover { transform: translateY(-1px); }
+.tf-abtn--waiting { opacity: .55; }
+.tf-live { background: linear-gradient(90deg, #fffdf4, #fff 60%); }
+.tf-chipslot { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.tf-chip { display: inline-flex; align-items: center; height: 24px; padding: 0 11px; border-radius: 999px; border: none; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.tf-chip--btn { cursor: pointer; font-family: inherit; }
+.tf-stamp { font-size: 11px; font-weight: 500; color: #9a8a55; white-space: nowrap; }
+.tf-wrapband { display: flex; align-items: center; gap: 12px; padding: 13px 20px; background: linear-gradient(90deg, #f0faf4, #fff); border-bottom: 1px solid #dcefe3; }
+.tf-wrap-emoji { font-size: 18px; }
+.tf-wrap-big { margin: 0; font-size: 13.5px; font-weight: 600; color: #17864f; }
+.tf-wrap-sub { margin: 1px 0 0; font-size: 12px; color: #6a8a78; }
+.tf-done .am-update, .tf-done .am-handle { color: #9a9a9e; }
+.tf-ring { display: inline-flex; flex: none; padding: 2px; border-radius: 999px; background: conic-gradient(#73ddbd, #2baf87, #73ddbd); }
+.tf-ring .am-avatar { width: 34px; height: 34px; border: 2px solid #fff; }
+.tf-seepost { font-size: 12px; font-weight: 600; color: #555; white-space: nowrap; }
+.tf-wraprow .am-chev { width: auto; height: auto; }
+.am-row-cta-slot { display: flex; align-items: center; }
