@@ -19,7 +19,7 @@ let persistedMode = 'product';
 let persistedRail = 'b'; // 'a' split cards · 'b' one box (opens on B for review) // 'product' | 'local'
 let persistedTable = 'f'; // 'a' Amine table · 'f' table-fixes letter (creators-table-study picks)
 // F-letter options (Julia's Jul 28 review): edu B/C/D/E · stage 3B/3A · actions 4A/4D · late 7A/7B
-let persistedOpts = { edu: 'b', stage: 'chips', act: 'rows', late: 'quiet' };
+let persistedOpts = { edu: 'b', stage: 'chips', act: 'rows', late: 'quiet', head: 'grey' };
 
 export default function CampaignPulse() {
   const [idx, setIdx] = useState(persistedIdx);
@@ -170,6 +170,10 @@ export default function CampaignPulse() {
           <span className="cp-scrub-tag">LATE</span>
           <button type="button" title="Done rows cool down (7A)" className={fOpts.late === 'quiet' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('late', 'quiet')}>Quiet</button>
           <button type="button" title="Split sections (7B)" className={fOpts.late === 'groups' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('late', 'groups')}>Groups</button>
+          <span className="cp-mode-sep" aria-hidden />
+          <span className="cp-scrub-tag">HEADER</span>
+          <button type="button" title="#fafafa header tint" className={fOpts.head === 'grey' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('head', 'grey')}>Grey</button>
+          <button type="button" title="White header" className={fOpts.head === 'white' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('head', 'white')}>White</button>
         </div>
       )}
 

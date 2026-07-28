@@ -277,6 +277,7 @@
 .tf-table .am-cols, .tf-table .am-row { grid-template-columns: 218px minmax(0, 1fr) 170px 36px; }
 .tf-table .tf-wraprow { grid-template-columns: 218px minmax(0, 1fr) 170px 96px; }
 .tf-head { overflow: visible; background: #fafafa; border-radius: 16px 16px 0 0; } /* the strip's grey moves up: header = zone, rows = content (Julia, Jul 28) */
+.tf-head--white { background: #fff; }
 .tf-dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; margin-right: 6px; vertical-align: 1px; }
 .tf-sub--amber { color: #b57506 !important; font-weight: 600; }
 .tf-info { position: relative; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 11px; border-radius: 999px; border: 1px solid #e3e3e3; background: #fff; font-size: 12px; color: #717171; cursor: default; white-space: nowrap; }

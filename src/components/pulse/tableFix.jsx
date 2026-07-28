@@ -46,7 +46,7 @@ let coachDismissed = false;
 const SPOTS_RULE = `First ${SPOTS} to reply take the spots — extras are saved for your next campaign.`;
 
 export default function FixedTable({ scene, rows, filter, onFilter, openCrew, toggleCrew, opts = {} }) {
-  const { edu = 'b', stage = 'chips', act = 'rows', late = 'quiet' } = opts;
+  const { edu = 'b', stage = 'chips', act = 'rows', late = 'quiet', head = 'grey' } = opts;
   const [, bump] = useReducer((n) => n + 1, 0);
   const crewAll = crewFor(scene.day, scene.mode);
   const cohort = crewAll.length;
@@ -247,7 +247,7 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
 
   return (
     <section className="am-card am-table tf-table" aria-label="Creators">
-      <div className="am-card-head tf-head">
+      <div className={`am-card-head tf-head${head === 'white' ? ' tf-head--white' : ''}`}>
         <div className="am-head-l rel-anchor">
           <span className="amsym am-symtile"><img src={ICO.group} alt="" /></span>
           <div style={{ position: 'relative' }}>
