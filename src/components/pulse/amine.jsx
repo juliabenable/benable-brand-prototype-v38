@@ -152,7 +152,7 @@ export function AmineRailBar({ scene, filter, onFilter }) {
   const filtering = filter != null;
   const last = AM_STAGES.length - 1;
   /* done = the campaign is underway and no slot is being sourced right now;
-     the permanent slot shows a green ✓ instead of a hatched 0 (Julia, Jul 27) */
+     the permanent slot shows a lone green ✓ (Julia, Jul 27) */
   const srcDone = f.casting === 0 && f.found === 0 && f.named.length > 0;
 
   return (
@@ -165,9 +165,9 @@ export function AmineRailBar({ scene, filter, onFilter }) {
             ? (f.named.length ? 'Rematching you' : 'Matching you with creators')
             : srcDone ? 'All done for now' : 'If a spot opens up'}
         count={srcDone ? <span className="am2-check" role="img" aria-label="Sourcing done">✓</span> : f.casting}
-        fill={f.casting > 0 ? '#dbeee3' : srcDone ? '#f1f3f1' : undefined}
+        fill={f.casting > 0 ? '#dbeee3' : srcDone ? '#eff5f1' : undefined}
         hatchClass={f.casting > 0 || srcDone ? '' : 'am-seg--sliver'}
-        ink={f.casting > 0 ? '#06301f' : '#808080'}
+        ink={f.casting > 0 ? '#06301f' : '#a3a8a3'}
         radius={{ left: 74, right: 4 }}
         disabled={f.casting === 0}
         selected={filter === 'casting'}
@@ -179,9 +179,9 @@ export function AmineRailBar({ scene, filter, onFilter }) {
       {stagesFor(scene.mode).map((s, i) => {
         const n = f.counts[i];
         const empty = n === 0;
-        /* past = everyone has moved beyond this stage → plain grey (no hatch),
-           count reads "6/6" (all who passed / cohort) in green (Julia, Jul 27).
-           Hatch is reserved for the road ahead. */
+        /* past = everyone has moved beyond this stage → pale-green slab with a
+           green ✓ N/N (Julia, Jul 28: simplified — no stripes anywhere; future
+           stages are plain quiet grey). */
         const past = empty && f.named.length > 0 && f.reached(i + 1) === f.named.length;
         const active = filter === i;
         const rail = AM2_RAIL[i];
@@ -192,12 +192,12 @@ export function AmineRailBar({ scene, filter, onFilter }) {
             label={s.label}
             hint={past ? `All ${f.named.length} passed this stage` : hint(n, f.named.length)}
             count={past
-              ? <span className="am2-past">{`${f.reached(i + 1)}/${f.named.length}`}</span>
+              ? <span className="am2-past"><span className="am2-past-tick" aria-hidden>✓</span>{`${f.reached(i + 1)}/${f.named.length}`}</span>
               /* everyone thanked → the wrap gets its sparkle (Julia, Jul 27) */
               : i === last && n > 0 && n === f.named.length ? `${n} ✨` : n}
-            fill={past ? '#f1f3f1' : empty ? undefined : rail.fill}
+            fill={past ? '#eff5f1' : empty ? undefined : rail.fill}
             hatchClass={empty && !past ? 'am-seg--sliver' : ''}
-            ink={empty && !past ? '#808080' : past ? '#17864f' : rail.ink}
+            ink={empty && !past ? '#a3a8a3' : past ? '#17864f' : rail.ink}
             radius={{ left: 4, right: i === last ? 100 : 4 }}
             disabled={empty}
             selected={active}

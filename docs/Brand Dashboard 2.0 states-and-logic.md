@@ -16,18 +16,18 @@ Every column = count slab + stage label + hint (hint = *what's happening now*; l
 
 | State | When | Slab | Count | Hint |
 |---|---|---|---|---|
-| **Past** | every active creator is *beyond* this stage | plain grey `#f1f3f1` — **no diagonal hatch** | **`N/N` in green** `#17864f` (e.g. `6/6`) | "All N passed this stage" |
+| **Past** | every active creator is *beyond* this stage | pale green `#eff5f1` | **`✓ N/N` in green** `#17864f` (e.g. `✓ 6/6`) | "All N passed this stage" |
 | **Occupied** | ≥1 creator currently here | green ramp fill | count of creators here | stage-specific, e.g. "3 packages in transit", "2 visits booked", "Creator will post soon" |
-| **Future (empty)** | stage not reached yet | grey + **diagonal hatch** | grey `0` | forward-looking, e.g. "Once Katie's team approves drafts" |
+| **Future (empty)** | stage not reached yet | plain quiet grey `#f6f7f6` — **no stripes** | muted grey `0` | forward-looking, e.g. "Once Katie's team approves drafts" |
 | **Needs you** | ≥1 creator here needs brand action | as occupied | as occupied | + **amber badge** with the count; click filters to those creators |
 
-The diagonal hatch is **reserved for the road ahead**. Anything already completed reads green (check or `N/N`), so a glance shows how far along the campaign is. When **every** creator reaches Thanked, the Thanked count gets a sparkle: **`6 ✨`**.
+No stripes anywhere (simplified Jul 28): the road ahead is a plain quiet grey slab with a muted 0, and anything completed sits on a pale-green slab reading green — Sourcing a lone ✓, full stages **✓ N/N** — so a glance shows how far along the campaign is. When **every** creator reaches Thanked, the Thanked count gets a sparkle: **`6 ✨`**.
 
 **Sourcing slot** (always drawn, always leftmost, never more than one — even if several spots are being sourced):
 
 | State | When | Rendering |
 |---|---|---|
-| **Done / idle** | campaign underway, nothing being sourced | plain grey slab, **green ✓** instead of a number, hint **"All done for now"** |
+| **Done / idle** | campaign underway, nothing being sourced | pale-green slab, lone **green ✓**, hint **"All done for now"** |
 | **Sourcing…** | rematch in progress | pale green `#dbeee3`, hint "(Re)matching you with creators" — no promises, no names |
 | **Matches found** | rematch candidates ready | label "Matches found", hint "New profiles to review", **amber badge** → needs-you filter |
 
