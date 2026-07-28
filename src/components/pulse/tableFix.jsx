@@ -46,7 +46,7 @@ let coachDismissed = false;
 const SPOTS_RULE = `First ${SPOTS} to reply take the spots — extras are saved for your next campaign.`;
 
 export default function FixedTable({ scene, rows, filter, onFilter, openCrew, toggleCrew, opts = {} }) {
-  const { edu = 'b', stage = 'chips', act = 'rows', late = 'quiet', head = 'grey' } = opts;
+  const { edu = 'b', stage = 'chips', act = 'rows', late = 'quiet', head = 'grey', ship = 'band' } = opts;
   const [, bump] = useReducer((n) => n + 1, 0);
   const crewAll = crewFor(scene.day, scene.mode);
   const cohort = crewAll.length;
@@ -95,6 +95,35 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
     URL.revokeObjectURL(url);
     setSheetDone(true);
   };
+
+  /* the ship flow's pieces, shared by the band and the in-header placement */
+  const shipInHead = shipDay && ship === 'head';
+  const stepsSeq = sheetDone ? (
+    <>
+      <span className="tf-step tf-step--done"><i className="tf-sn">✓</i>Order sheet downloaded</span>
+      <span className="tf-arrow" aria-hidden>→</span>
+      <span className="tf-step tf-step--now"><i className="tf-sn">2</i>Ship, then add tracking per creator</span>
+    </>
+  ) : (
+    <>
+      <span className="tf-step tf-step--now"><i className="tf-sn">1</i>Download the order sheet</span>
+      <span className="tf-arrow" aria-hidden>→</span>
+      <span className="tf-step"><i className="tf-sn">2</i>Ship the packages</span>
+      <span className="tf-arrow" aria-hidden>→</span>
+      <span className="tf-step"><i className="tf-sn">3</i>Add tracking below</span>
+    </>
+  );
+  const dlBtn = (label) => sheetDone ? (
+    <button type="button" className="am-showall" onClick={downloadOrders}>⬇ Get the sheet again</button>
+  ) : (
+    <button type="button" className="tf-dl" onClick={downloadOrders}>
+      <svg aria-hidden width="12" height="12" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2.5v7m0 0 3-3m-3 3-3-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 13.5h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+      {label}
+    </button>
+  );
 
   const liveNames = liveAll.map((c) => c.name);
   const liveLabel = liveNames.length > 1
@@ -262,7 +291,10 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
             )}
           </div>
         </div>
+        {/* SHIP Header — the flow lives inside the header (Julia's mock, Jul 28) */}
+        {shipInHead && <div className="tf-steps-h">{stepsSeq}</div>}
         <div className="am-head-r">
+          {shipInHead && dlBtn('Download orders')}
           {filtered && (
             <button type="button" className="am-showall" onClick={() => onFilter(null)}>
               Show all <span aria-hidden>✕</span>
@@ -272,36 +304,10 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
       </div>
 
       {/* §6 · the shipping flow reads as a flow — download is step one */}
-      {shipDay && (
+      {shipDay && !shipInHead && (
         <div className="tf-steps">
-          <div className="tf-steps-l">
-            {sheetDone ? (
-              <>
-                <span className="tf-step tf-step--done"><i className="tf-sn">✓</i>Order sheet downloaded</span>
-                <span className="tf-arrow" aria-hidden>→</span>
-                <span className="tf-step tf-step--now"><i className="tf-sn">2</i>Ship, then add tracking per creator</span>
-              </>
-            ) : (
-              <>
-                <span className="tf-step tf-step--now"><i className="tf-sn">1</i>Download the order sheet</span>
-                <span className="tf-arrow" aria-hidden>→</span>
-                <span className="tf-step"><i className="tf-sn">2</i>Ship the packages</span>
-                <span className="tf-arrow" aria-hidden>→</span>
-                <span className="tf-step"><i className="tf-sn">3</i>Add tracking below</span>
-              </>
-            )}
-          </div>
-          {sheetDone ? (
-            <button type="button" className="am-showall" onClick={downloadOrders}>⬇ Get the sheet again</button>
-          ) : (
-            <button type="button" className="tf-dl" onClick={downloadOrders}>
-              <svg aria-hidden width="12" height="12" viewBox="0 0 16 16" fill="none">
-                <path d="M8 2.5v7m0 0 3-3m-3 3-3-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M3 13.5h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              Download order sheet
-            </button>
-          )}
+          <div className="tf-steps-l">{stepsSeq}</div>
+          {dlBtn('Download order sheet')}
         </div>
       )}
 

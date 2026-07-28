@@ -19,7 +19,7 @@ let persistedMode = 'product';
 let persistedRail = 'b'; // 'a' split cards · 'b' one box (opens on B for review) // 'product' | 'local'
 let persistedTable = 'f'; // 'a' Amine table · 'f' table-fixes letter (creators-table-study picks)
 // F-letter options (Julia's Jul 28 review): edu B/C/D/E · stage 3B/3A · actions 4A/4D · late 7A/7B
-let persistedOpts = { edu: 'b', stage: 'chips', act: 'rows', late: 'quiet', head: 'grey', icons: 'on' };
+let persistedOpts = { edu: 'b', stage: 'chips', act: 'rows', late: 'quiet', head: 'grey', icons: 'on', ship: 'band' };
 
 export default function CampaignPulse() {
   const [idx, setIdx] = useState(persistedIdx);
@@ -179,6 +179,10 @@ export default function CampaignPulse() {
           <span className="cp-scrub-tag">ICONS</span>
           <button type="button" title="Icon tiles by card titles" className={fOpts.icons === 'on' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('icons', 'on')}>On</button>
           <button type="button" title="Titles only — no icon tiles" className={fOpts.icons === 'off' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('icons', 'off')}>Off</button>
+          <span className="cp-mode-sep" aria-hidden />
+          <span className="cp-scrub-tag">SHIP</span>
+          <button type="button" title="Steps band under the header" className={fOpts.ship === 'band' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('ship', 'band')}>Band</button>
+          <button type="button" title="Steps + download inside the header" className={fOpts.ship === 'head' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('ship', 'head')}>Header</button>
         </div>
       )}
 
