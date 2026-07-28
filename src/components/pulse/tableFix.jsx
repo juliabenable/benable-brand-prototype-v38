@@ -350,7 +350,8 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
           </button>
         </div>
       ) : !grouped ? (
-        rows.map((c, i) => renderRow(c, i))
+        /* ACTIONS Calm (4C): gold text + pill only — no row wash, no edge */
+        rows.map((c, i) => renderRow(c, i, { calm: act === 'calm' }))
       ) : (
         <>
           {actGroup ? (
@@ -359,7 +360,7 @@ export default function FixedTable({ scene, rows, filter, onFilter, openCrew, to
               {needsRows.map((c, i) => renderRow(c, `n${i}`, { calm: true }))}
             </>
           ) : (
-            needsRows.map((c, i) => renderRow(c, `n${i}`))
+            needsRows.map((c, i) => renderRow(c, `n${i}`, { calm: act === 'calm' }))
           )}
           {lateGroups ? (
             <>

@@ -166,6 +166,7 @@ export default function CampaignPulse() {
           <span className="cp-scrub-tag">ACTIONS</span>
           <button type="button" title="Amber row anatomy (4A)" className={fOpts.act === 'rows' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('act', 'rows')}>Rows</button>
           <button type="button" title="Needs-you group band (4D)" className={fOpts.act === 'group' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('act', 'group')}>Group</button>
+          <button type="button" title="Quiet (4C): gold text + pill only, no row wash or edge" className={fOpts.act === 'calm' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('act', 'calm')}>Calm</button>
           <span className="cp-mode-sep" aria-hidden />
           <span className="cp-scrub-tag">LATE</span>
           <button type="button" title="Done rows cool down (7A)" className={fOpts.late === 'quiet' ? 'cp-scrub-day cp-scrub-day--active' : 'cp-scrub-day'} onClick={() => setOpt('late', 'quiet')}>Quiet</button>
