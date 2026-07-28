@@ -299,7 +299,8 @@
 .tf-step--now { color: #1c1c1c; font-weight: 600; }
 .tf-step--now .tf-sn { border-color: #f0a32e; color: #a86a00; }
 .tf-arrow { color: #c9c9c9; }
-.tf-dl { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 15px; border-radius: 999px; background: #1c1c1c; color: #fff; border: none; font-family: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.tf-dl { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 15px; border-radius: 999px; background: #fff; color: #1c1c1c; border: 1px solid #e3e3e3; font-family: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: border-color 0.15s; } /* white per Julia's mock, Jul 28 */
+.tf-dl:hover { border-color: #c9c9c9; }
 .tf-band { display: flex; align-items: center; gap: 12px; padding: 11px 20px; background: linear-gradient(90deg, #fffbeb, #fff); border-bottom: 1px solid #f0e7cd; }
 .tf-faces { display: flex; flex: none; }
 .tf-faces img { width: 26px; height: 26px; border-radius: 999px; border: 2px solid #fff; object-fit: cover; }
