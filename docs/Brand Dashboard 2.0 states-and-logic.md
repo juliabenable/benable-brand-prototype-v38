@@ -18,7 +18,7 @@ Every column = count slab + stage label + hint (hint = *what's happening now*; l
 |---|---|---|---|---|
 | **Past** | every active creator is *beyond* this stage | pale green `#eff5f1` | **`✓ N/N` in green** `#17864f` (e.g. `✓ 6/6`) | "All N passed this stage" |
 | **Occupied** | ≥1 creator currently here | green ramp fill | count of creators here | stage-specific, e.g. "3 packages in transit", "2 visits booked", "Creator will post soon" |
-| **Future (empty)** | stage not reached yet | plain quiet grey `#f6f7f6` — **no stripes** | muted grey `0` | forward-looking, e.g. "Once Katie's team approves drafts" |
+| **Future (empty)** | stage not reached yet | quiet grey `#f6f7f6` with a light `#e2e5e2` outline — **no stripes** | muted grey `0` | forward-looking, e.g. "Once Katie's team approves drafts" |
 | **Needs you** | ≥1 creator here needs brand action | as occupied | as occupied | + **amber badge** with the count; click filters to those creators |
 
 No stripes anywhere (simplified Jul 28): the road ahead is a plain quiet grey slab with a muted 0, and anything completed sits on a pale-green slab reading green — Sourcing a lone ✓, full stages **✓ N/N** — so a glance shows how far along the campaign is. When **every** creator reaches Thanked, the Thanked count gets a sparkle: **`6 ✨`**.
